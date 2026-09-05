@@ -1,12 +1,12 @@
 # What happens when you type a URL into your browser?
 
-Date: 06 Sep 2026
+Date: 05 Sep 2026
 
 > **Video:** [What happens when you type a URL into your browser? (ByteByteGo)](https://www.youtube.com/watch?v=AlkDbnbv7dk)
 
 ## URL kya hota hai?
 
-**URL** = Universal Resource Locator. Iske 4 parts hote hain:
+**URL** = Uniform Resource Locator. Iske 4 parts hote hain:
 
 | Part | Example | Matlab |
 |------|---------|--------|

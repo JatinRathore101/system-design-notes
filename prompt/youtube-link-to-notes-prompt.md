@@ -85,6 +85,20 @@ System-Design-Tutorial---Load-Balancing-Explained.md
   - `Date: DD MMM YYYY` (e.g. `Date: 06 Sep 2026`)
 - Adapt the structure to the actual content. Do not force unnecessary sections.
 
+## UPDATE THE NOTES INDEX (`table.md`)
+
+After creating the notes file, you MUST add a row for it in the `table.md` file at the repo root.
+
+* `table.md` contains a markdown table with columns: `#` (serial number), `Date`, `Title`, `Link to video`, `Link to file`.
+* Append a new row at the end of the table with:
+  * `#` — increment the serial number from the last row (use `1` if the table is empty).
+  * `Date` — same date as in the notes file (`DD MMM YYYY`).
+  * `Title` — the exact video title.
+  * `Link to video` — `[Watch](<youtube-url>)`.
+  * `Link to file` — clickable relative link that opens the notes file, e.g. `[Open notes](./notes/<filename>.md)`.
+* If `table.md` does not exist, create it with the header + this first row.
+* Do not modify or reorder existing rows — only append the new one.
+
 ## TOKEN/CREDIT EFFICIENCY
 
 Be extremely mindful of Claude usage.
@@ -113,5 +127,6 @@ After successfully creating the file, give me only:
 
 1. A short confirmation that it was created
 2. The file path
+3. Confirmation that the row was added to `table.md`
 
 If the transcript cannot be obtained through a free/public source, explain the problem briefly and do not process the video.
