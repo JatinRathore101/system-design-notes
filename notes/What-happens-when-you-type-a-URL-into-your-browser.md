@@ -1,8 +1,8 @@
 # What happens when you type a URL into your browser?
 
-Date: 05 Sep 2026
-
-> **Video:** [What happens when you type a URL into your browser? (ByteByteGo)](https://www.youtube.com/watch?v=AlkDbnbv7dk)
+- **Topic:** SYSTEM DESIGN
+- **Video:** [What happens when you type a URL into your browser? (ByteByteGo)](https://www.youtube.com/watch?v=AlkDbnbv7dk)
+- **Date:** 05 Sep 2026
 
 ## URL kya hota hai?
 

@@ -2,6 +2,24 @@ Use this public YouTube video URL containing a computer science / software engin
 
 Your task is to turn the video's **publicly available transcript into high-quality summarized study notes**.
 
+## INPUTS
+
+I will give you two things:
+
+1. **YouTube video URL** — the tutorial video.
+2. **Topic** — which subject this note belongs to (e.g. `system-design`, `lld`, `dbms`).
+
+If I forget to give the **topic**, STOP and ask me for it. Do NOT guess the topic from the video title.
+
+### Topic slug + display name
+
+* **Slug** = lowercase, non-alphanumeric chars replaced with `-`, repeated `-` collapsed, leading/trailing `-` removed.
+  * `System Design` / `system_design` / `System-Design` → all become `system-design`.
+  * Slug is used for the index filename: `<topic-slug>.table.md`.
+* **Display name** = slug ke saare non-alphanumeric chars ko space se replace karo, poora UPPERCASE.
+  * `system-design` → `SYSTEM DESIGN`, `lld` → `LLD`.
+  * Display name is used inside the note header and as the index file's H1 heading.
+
 ## IMPORTANT — DO NOT PROCESS THE VIDEO
 
 * **DO NOT download the video.**
@@ -80,24 +98,56 @@ System-Design-Tutorial---Load-Balancing-Explained.md
 
 ## MARKDOWN STRUCTURE
 
-- Keep the video title and video link in the top of markdown file
-- Add date at the top of the file in this format:
-  - `Date: DD MMM YYYY` (e.g. `Date: 06 Sep 2026`)
-- Adapt the structure to the actual content. Do not force unnecessary sections.
+The file must start with an H1 title followed by this exact header block:
 
-## UPDATE THE NOTES INDEX (`table.md`)
+```markdown
+# <Exact Video Title>
 
-After creating the notes file, you MUST add a row for it in the `table.md` file at the repo root.
+- **Topic:** SYSTEM DESIGN
+- **Video:** [<Exact Video Title>](https://www.youtube.com/watch?v=...)
+- **Date:** 06 Sep 2026
+```
 
-* `table.md` contains a markdown table with columns: `#` (serial number), `Date`, `Title`, `Link to video`, `Link to file`.
-* Append a new row at the end of the table with:
-  * `#` — increment the serial number from the last row (use `1` if the table is empty).
-  * `Date` — same date as in the notes file (`DD MMM YYYY`).
-  * `Title` — the exact video title.
-  * `Link to video` — `[Watch](<youtube-url>)`.
-  * `Link to file` — clickable relative link that opens the notes file, e.g. `[Open notes](./notes/<filename>.md)`.
-* If `table.md` does not exist, create it with the header + this first row.
-* Do not modify or reorder existing rows — only append the new one.
+- `Topic` — the topic **display name** (UPPERCASE form, see INPUTS above).
+- `Video` — exact video title as link text, YouTube URL as target.
+- `Date` — today's date in `DD MMM YYYY` format.
+- Header block ke baad hi content start ho.
+- Adapt the rest of the structure to the actual content. Do not force unnecessary sections.
+
+## UPDATE THE TOPIC INDEX (`<topic-slug>.table.md`)
+
+After creating the notes file, you MUST record it in that topic's index file at the **repo root**.
+
+1. Look for `<topic-slug>.table.md` at the repo root (e.g. `system-design.table.md`).
+2. **If it exists** — append ONE new row at the end of the table:
+   * `#` — last row ka serial number +1.
+   * `Date` — same date as in the notes file (`DD MMM YYYY`).
+   * `Title` — the exact video title.
+   * `Link to video` — `[Watch](<youtube-url>)`.
+   * `Link to file` — clickable relative link, e.g. `[Open notes](./notes/<filename>.md)`.
+   * Do NOT modify, reorder, or renumber existing rows — only append.
+3. **If it does not exist** — create it with the topic display name as H1, the table header, and this note as row `1`:
+
+   ```markdown
+   # SYSTEM DESIGN
+
+   | # | Date | Title | Link to video | Link to file |
+   |---|------|-------|---------------|--------------|
+   | 1 | 06 Sep 2026 | <Video Title> | [Watch](<youtube-url>) | [Open notes](./notes/<filename>.md) |
+   ```
+
+* Index files always live at the repo root, never inside `notes/`.
+* Never create a new index file for a topic that already has one — check first.
+
+## UPDATE THE README (only for a brand-new topic)
+
+* If you had to **create** the `<topic-slug>.table.md` file (i.e. this is the repo's first note for that topic), also add a row for it in the `## Notes Index` table inside `README.md`:
+
+  ```markdown
+  | SYSTEM DESIGN | [system-design.table.md](./system-design.table.md) |
+  ```
+
+* If the topic's index file already existed, **do not touch `README.md`** at all.
 
 ## TOKEN/CREDIT EFFICIENCY
 
@@ -106,7 +156,9 @@ Be extremely mindful of Claude usage.
 The workflow should be:
 
 ```text
-YouTube URL
+YouTube URL + Topic
+    ↓
+Normalize topic → slug + display name
     ↓
 Fetch TITLE
     ↓
@@ -116,7 +168,11 @@ Claude processes ONLY the transcript
     ↓
 Generate study notes
     ↓
-Save as <video-title>.md
+Save as notes/<video-title>.md
+    ↓
+Append row to <topic-slug>.table.md (create if missing)
+    ↓
+If topic was new → add row to README Notes Index
 ```
 
 **Never use the video itself as input to Claude.**
@@ -126,7 +182,9 @@ Do not unnecessarily reproduce the raw transcript in the conversation. The final
 After successfully creating the file, give me only:
 
 1. A short confirmation that it was created
-2. The file path
-3. Confirmation that the row was added to `table.md`
+2. The notes file path
+3. The topic slug used
+4. Which index file the row was added to, and whether that index file was newly created
+5. Whether `README.md` was updated (only happens for a brand-new topic)
 
 If the transcript cannot be obtained through a free/public source, explain the problem briefly and do not process the video.

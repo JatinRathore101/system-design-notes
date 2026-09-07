@@ -1,7 +1,8 @@
 # System Design: Why is Kafka fast?
 
+- **Topic:** SYSTEM DESIGN
 - **Video:** [System Design: Why is Kafka fast?](https://www.youtube.com/watch?v=UNUz1-msbOM) (ByteByteGo)
-- Date: 06 Sep 2026
+- **Date:** 06 Sep 2026
 
 ## "Fast" ka matlab kya hai yahan?
 

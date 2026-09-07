@@ -2,7 +2,28 @@
 
 ## About This Repo
 
-This repo stores markdown tutorial notes for **System Design** and **HLD (High Level Design)** topics. Every file is a self-contained tutorial/notes file on one topic.
+This is a **multi-topic notes repo** — markdown tutorial notes for whatever CS topic I am studying (`system-design`, `lld`, aur aage jo bhi add ho). Every file is a self-contained tutorial/notes file based on one video/topic.
+
+## Topics & Index Files
+
+- Har note ek **topic** se belong karta hai. Topic slug hamesha **lowercase kebab-case**, no spaces — `system-design`, `lld`, `dbms`.
+- Agar topic input kisi aur form me mile (`System Design`, `system_design`), toh normalize karo: lowercase karo → non-alphanumeric chars ko `-` se replace karo → repeated `-` collapse karo → aage-peeche ke `-` hata do.
+- **Topic display name** = slug ke saare non-alphanumeric chars ko space se replace karo aur poora UPPERCASE kar do. Example: `system-design` → `SYSTEM DESIGN`.
+- **Notes hamesha flat `notes/` folder me** rehte hain — topic-wise subfolder kabhi mat banao.
+- Har topic ka apna index file repo root pe: **`<topic-slug>.table.md`** (e.g. `system-design.table.md`, `lld.table.md`).
+- Index file ka format fix hai — `# <TOPIC DISPLAY NAME>` heading, phir ye table:
+
+  ```markdown
+  # SYSTEM DESIGN
+
+  | # | Date | Title | Link to video | Link to file |
+  |---|------|-------|---------------|--------------|
+  | 1 | 05 Sep 2026 | <Video Title> | [Watch](<youtube-url>) | [Open notes](./notes/<filename>.md) |
+  ```
+
+- Naya note banne pe us topic ki table file me **sirf ek nayi row append** karo (`#` last row se +1). Existing rows ko na edit karo, na reorder.
+- Topic ki table file exist nahi karti toh nayi banao — heading + table header + row `1`.
+- **Naya topic** banaya ho toh `README.md` ke "Notes Index" table me bhi us topic ki ek row add kar do. Purana topic hai toh README ko haath mat lagao.
 
 ## Language & Tone (MOST IMPORTANT)
 
@@ -61,6 +82,20 @@ A typical tutorial file should roughly follow (adapt as needed per topic):
 
 ## File Conventions
 
-- File names: `kebab-case.md` (e.g. `load-balancing.md`, `cap-theorem.md`, `url-shortener-hld.md`).
+- Notes ki files hamesha `notes/` folder me.
+- File names: `kebab-case.md` (e.g. `load-balancing.md`, `cap-theorem.md`, `url-shortener-hld.md`). YouTube video se bana note ho toh video title based naam (spaces → `-`) bhi theek hai.
 - One topic per file. Bade topics ko split karo instead of one giant file.
 - Related topics ko link karo: `[Caching](./caching.md)`.
+- Har note file ka header ye standard format follow kare — H1 title ke baad Topic / Video / Date ka bullet block:
+
+  ```markdown
+  # <Note ya Video Title>
+
+  - **Topic:** SYSTEM DESIGN
+  - **Video:** [<Video Title>](https://www.youtube.com/watch?v=...)
+  - **Date:** 06 Sep 2026
+  ```
+
+  - `Topic` hamesha display name (UPPERCASE) form me.
+  - `Video` line sirf tab jab note kisi video se bana ho.
+  - `Date` format: `DD MMM YYYY`.
